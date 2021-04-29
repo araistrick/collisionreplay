@@ -3,7 +3,7 @@
 This repository contains two branches, **master** and **website**
 
 **master** will contain implementation source code for the paper once it is released.
-**website** currently contains up to date code for our [project webpage](http://fouheylab.eecs.umich.edu/~alexrais/collision/)
+**website** currently contains up to date code for our [project webpage](https://araistrick.github.io/collisionreplay)
 
 
 If you find Collision Replay useful for your work, please cite:
