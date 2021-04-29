@@ -1,0 +1,104 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.vis-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 10px
+}
+
+.button-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background: #e0e0e0;
+  padding: 10px;
+  width: 100%;
+}
+
+#overlay-canvas {
+  border: 2px black;
+  border-style: solid;
+}
+
+#distribution-canvas {
+  position: relative;
+  left: 0px;
+  top: 0px;
+}
+
+/* from https://cssninja.io/blog/post/simple-loader-bulma */
+.loader-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity .3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+}
+
+.loader {
+  width: 100px;
+  height: 100px;
+}
+
+.is-active {
+  opacity: 1;
+  z-index: 100;
+}
+
+.colorbar-wrapper{
+  position: relative;
+  text-align: center;
+  color:white
+}
+
+.colorbar-img {
+  display: block;
+  height: 100%;
+  min-width: 50px;
+
+  border: 2px black;
+  border-style: solid;
+}
+
+.top-colorbar-text {
+  position: absolute;
+  top: 7px;
+  left: 4px;
+  
+  font-size: 30px;
+  color: white;
+  font-weight: bold;
+  -webkit-text-stroke: 1px black;
+}
+
+.bottom-colorbar-text {
+  position: absolute;
+  bottom: 7px;
+  left: 4px;
+
+
+  font-size: 30px;
+  color: white;
+  font-weight: bold;
+  -webkit-text-stroke: 1px black;
+}

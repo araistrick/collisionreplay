@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Collision Replay learns about scenes by bumping into them">
+  <meta name="keywords" content="Collision Replay, Collisions, SDFC">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Collision Replay</title>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/js-colormaps.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Collision Replay: What Does Bumping Into Things Tell You About Scene Geometry?</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="http://alexrais.com">Alexander Raistrick</a>,</span>
+            <span class="author-block">
+              <a href="https://nileshkulkarni.github.io/">Nilesh Kulkarni</a>,</span>
+            <span class="author-block">
+              <a href="https://web.eecs.umich.edu/~fouhey/">David F. Fouhey</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">University of Michigan</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href='./static/raistrick21collision.pdf'
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a 
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/araistrick/collisionreplay"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming Soon)</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="title is-2">Abstract</h2>
+    <div class="content has-text-justified">
+      What does bumping into things in a scene tell you about scene geometry?  In this paper, we investigate 
+      the idea of learning from collisions. At the heart of our approach is the idea of collision replay, 
+      where we use examples of a collision to provide supervision for observations at a past frame.
+      We use collision replay to train convolutional neural networks to predict a distribution over 
+      collision time from new images. This  distribution  conveys  information  about  the navigational affordances
+      (e.g., corridors vs open spaces) and, as we show, can be converted into the distance function for the scene geometry.  
+      We analyze this approach with an agent that has noisy actuation in a photorealistic simulator.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="title is-2">Remote Prediction Results</h2>
+    <div class="content has-text-justified"><p> Below, we show a video of predicted navigability maps while traversing four held-out test set environments from the Gibson dataset. 
+      We compare two versions of our model, denoted as 'Noisy Training' and 'Noiseless Training'. In the noisy case (our primary setting), 
+      we show results from a model trained using dead-reckoning with noisy estimates of the agent's egomotion. 
+      We show the second, noiseless, case as a visualization of what the method could achieve 
+      with access to more accurate egomotion. </p></div>
+    <br>
+    <iframe width="100%" height="480" 
+      src="https://www.youtube.com/embed/yUcGxOFZvsg?&loop=1&muted=1" frameborder="0" 
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="title is-2">Interactive Results</h2>
+
+    <div class="content has-text-justified"><p>
+      <b>Explore our results!</b> Our model can estimate the 2D distance function of new scenes, that is, the distance of each point to the closest obstacle.
+      Examples of this distance prediction are shown on the left, and can be viewed for many example images. Clicking on one of the points reveals a plot of the
+      underlying 'hitting time distribution' for that point, which indicates how many steps the model estimates an agent could travel in any given direction before colliding
+      with the environment.
+    </p></div>
+
+    <div>
+      <div class="loader-wrapper">
+        <div class="loader is-loading"></div>
+      </div>
+
+      <div class="vis-panel">
+        <div style='display: flex; flex-direction: row;'>
+          <div class='container colorbar-wrapper' style='margin-right: 10px'>
+            <img class='colorbar-img' src='./static/images/colormap.png'>
+            <div class='top-colorbar-text'>4m</div>
+            <div class='bottom-colorbar-text'>0m</div>
+          </div>
+          <canvas id="overlay-canvas" width="512" height="512"></canvas>
+        </div>
+        <canvas id="distribution-canvas" width="512" height="512"></canvas>
+      </div>  
+
+      <div class="button-panel">
+        <div style='display: flex; flex-direction: row;'>
+          <button class="button" id="prev-example-button"> Previous Example </button>
+          <button class="button" id="next-example-button"> Next Example </button>
+        </div>
+        <label class="checkbox">
+          <input type="checkbox" checked id="noisy-training-box">
+          Use Noisy Training
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" id="show-occupied-box">
+          Show Occupied Points
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" checked id="use-polar-box">
+          Use Polar Plotting
+        </label> 
+    </div>
+
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container">
+    <h2 class="title is-2">BibTeX</h2>
+    <pre>
+      <code>
+@article{raistrick2021collision
+author    = {Raistrick, Alexander and Kulkarni, Nilesh and Fouhey, David F.},
+title     = {Collision Replay: What Does Bumping Into Things Tell You About Scene Geometry?},
+journal   = {arXiv preprint TODO},
+year      = {2021},
+}
+      </code>
+    </pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    Website adapted from <a href="https://github.com/nerfies/nerfies.github.io">nerfies.github.io's website source code</a>
+  </div>
+</footer>
+
+</body>
+</html>
