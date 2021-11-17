@@ -11,7 +11,7 @@ If you find Collision Replay useful for your work, please cite:
 @article{raistrick2021collision
 author    = {Raistrick, Alexander and Kulkarni, Nilesh and Fouhey, David F.},
 title     = {Collision Replay: What Does Bumping Into Things Tell You About Scene Geometry?},
-journal   = {arXiv preprint arXiv:2105.01061},
+journal   = {BMVC},
 year      = {2021},
 }.
 ```
